@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(getopt_port)
+project(getopt_port C CXX)
+
+add_library(getopt_port STATIC getopt.c)
 
 add_executable(test_getopt_port
   getopt.c
@@ -16,11 +18,11 @@ add_executable(test_getopt_port_c
 )
 
 # Have the tests accept const char* -> char* decay-
-if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+if (${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
   target_compile_options(test_getopt_port
     PRIVATE
     "-Wno-c++11-compat-deprecated-writable-strings")
-elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
   target_compile_options(test_getopt_port
     PRIVATE
     "-Wno-write-strings")
