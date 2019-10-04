@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 project(getopt_port C CXX)
 
 add_library(getopt_port STATIC getopt.c)
+target_include_directories(getopt_port PUBLIC getopt.h)
 
 add_executable(test_getopt_port
   getopt.c
